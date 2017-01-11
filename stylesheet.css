@@ -1,0 +1,36 @@
+#logo {
+	margin-top: 10px;
+}
+#menu {
+	margin: 10px;	
+}
+#comments {
+	border: 5px solid brown;
+	margin-top: 5px;
+	height: 900px;
+	width: 100%;
+	background: radial-gradient(100% 100% at 10% 30%, #f2f5f6, #e3eaed, #c8d7dc);
+}
+#form {
+	border: 3px solid blue;
+	height: 700px;
+	float: right;
+	margin: 10px;
+	background: radial-gradient(100% 100% at 10% 30%, #feffff, #ddf1f9, #a0d8ef);
+}
+#header {
+	text-align: center;
+	background-color: black;
+	font-size: 2.5em;
+	text-decoration: bold;
+	color: white;
+	border-radius: 10px;
+	margin-left: -16px;
+	margin-right: -16px;
+	margin-bottom: 15px;
+}
+#usercomment {
+	border: 2px solid purple;
+	border-radius: 15px;
+	width: 60%;
+}

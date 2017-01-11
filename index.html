@@ -1,0 +1,202 @@
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="stylesheet.css">
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		
+		<title>Comment Post</title>
+		
+		<script>
+		    function validate(){
+			    var name = document.getElementById("name");
+				var title = document.getElementById("title");
+				var comment = document.getElementById("commentBox");
+				var blank_field = false;
+				if(name.value == ""){
+				    name.style.backgroundColor = "pink";
+				    blank_field = true;
+				} else{
+				    name.style.backgroundColor = "lightgreen";
+				}
+				
+				if(title.value == ""){
+				    title.style.backgroundColor = "pink";
+					blank_field = true;
+				}else{
+				    title.style.backgroundColor = "lightgreen";
+				}
+				
+				if(comment.value == ""){
+				    comment.style.backgroundColor = "pink";
+					blank_field = true;
+				}else {
+				    comment.style.backgroundColor = "lightgreen";
+				}
+				
+				var text_color = document.getElementById("text_color");
+				var bg_color = document.getElementById("bg_color");
+				
+				if(text_color.value == "Choose A Color"){
+				    text_color.style.border = "2px solid red";
+					blank_field = true;
+				}else {
+					text_color.style.border = "none";
+				}
+				if (bg_color.value == "Choose A Color"){
+				    bg_color.style.border = "2px solid red";
+					blank_field = true;
+				}else{
+					bg_color.style.border = "none";
+				}
+				
+				var icon = document.getElementsByName("icon");
+				var radiobtn = document.getElementById("radiobtn");
+				var blank_radio = true;
+				
+				for(var i=0; i < icon.length; i++){
+				    if(icon[i].checked == true){
+					    blank_radio = false;
+					}
+				}
+				
+				if(blank_radio == true){
+				    radiobtn.style.border = "2px solid red";
+					blank_field = true;
+				} else{
+				    radiobtn.style.border = "none";
+				}
+				
+				//Error Message
+				var message = document.getElementById("message");
+				if(blank_field == true){
+				    message.innerHTML = "<h3 style='color:red;'>You missed a spot!</h3>";
+				}else{
+				    message.innerHTML="";
+				}
+				
+				add();
+			}//end of validate
+			
+			var array = [];
+			
+			function add(){
+			    //VARIABLES
+				var name = document.getElementById("name");
+				var title = document.getElementById("title");
+				var comment = document.getElementById("commentBox");
+
+				var icon = document.getElementsByName("icon");
+				var icon_value;
+				
+				var select_color = document.getElementById("text_color");
+				var select_bgclor = document.getElementById("bg_color");
+				
+				for(var i = 0; i < icon.length; i++){
+				    if(icon[i].checked == true){
+					    icon_value = icon[i].value;
+					}
+				}
+				
+				var storage = {name:name.value, title:title.value, comment:comment.value, icon:icon_value, text_color:text_color.value, bg_color:bg_color.value};
+				array.push(storage);
+			    show();
+			}//end add
+		
+		    function show(){
+			    var display = document.getElementById("display");
+				var post = "";
+				for(var i = 0; i < array.length; i++){ 
+				    post += "<div id='usercomment' style='background-color:"+array[i].bg_color+";'>"; 
+					post += "<input type='checkbox' onclick='gone("+i+");'/>";
+                    post += "<span style='color:"+array[i].text_color+";'>"; 
+				    post += "<img src=" + array[i].icon +" class='icon' />";
+				    post += "<strong>" + array[i].name + "</strong><br>";
+					post += "<strong>" + array[i].title + "</strong><br>";
+					post += "<strong>" + array[i].comment + "</strong><br>";
+					post += "</span>";
+                    post += "</div>";
+				}
+				display.innerHTML = post;
+			}//end show
+			
+			function gone(index){
+			    array.splice(index, 1);
+				var message = document.getElementById("message");
+				message.innerHTML = "<h3 style='color:red;'>You missed a spot!</h3>";
+				show();
+			}//end gone
+		</script>
+		
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-4" id="logo">
+					<img class="img-responsive" src="https://hawthornacademy.org/assets/images/footer-logo.png" />
+				</div>
+			</div><!-- end logo row -->
+			
+			<div class="row">
+				<div class="col-xs-12" id="menu">
+					<ul class="nav nav-tabs">
+						<li> <a href="#">HOME</a></li>
+						<li> <a href="#">ABOUT</a> </li>
+						<li> <a href="#">CONTACT</a></li>
+					</ul>
+				</div>
+			</div> <!-- end menu row -->
+			
+			<div class="row">
+				<div class="col-xs-12 col-sm-8" id="comments">COMMENTS
+					<div class="col-xs-12 col-sm-4" id="form">
+						<header id ="header">Leave a Comment</header>
+						<div id="message"></div>
+						<form clas="form-inline"> 
+							<label>Name:</label>
+							<input type="text" class="form-control" id="name" placeholder="Enter Name">
+							<label>Color</label>
+							<select id="text_color" class="form-control">
+							    <option>Choose A Color</option>
+								<option>Red </option>
+								<option>White </option>
+								<option>Blue </option>
+								<option>Green </option>
+							</select>
+						</form>
+						<form class="form-horizontal">
+							<label class="control-label">Title:</label>
+							<input type="text" class="form-control" id="title" placeholder="Enter Comment Title">
+							<label>Background Color:</label>
+							<select id="bg_color" class="form-control">
+							    <option>Choose A Color</option>
+								<option>Pink</option>
+								<option>Yellow</option>
+								<option>Black</option>
+								<option>Orange</option>
+							</select>
+						</form>
+						<form class="form-inline" id="radiobtn">
+							<label class="control-label">Icons:</label>
+							<input type="radio" name="icon" value="rsz_music_folder.png">
+							<img src="rsz_music_folder.png" class="icon" />
+							
+							<input type="radio" name="icon" value="rsz_favorites_add.png">
+							<img src="rsz_favorites_add.png" class="icon" />
+							
+							<input type="radio" name="icon" value="rsz_fireworks.png">
+							<img src="rsz_fireworks.png" class="icon" />
+							
+							<input type="radio" name="icon" value="rsz_classic.png"/>
+							<img src="rsz_classic.png" class="icon" />
+						</form>
+						<label class="control-label">Comment:</label>
+						<textarea class="form-control" rows="8" id="commentBox"></textarea><br >
+						<input class="btn btn-default" type="button" value="Submit Comment" onclick="validate()">
+					</div>
+					<div id="display"></div>
+				</div>
+			</div> <!-- end comment row -->
+			
+		</div><!-- end container div -->
+	</body>
+</html>
